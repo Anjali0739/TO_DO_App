@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block titlle %}SignUp{% endblock %}
+
+{% block content %}
+    <div class="signup-login">
+        <div class="signup-box">
+            <form method="post">
+                {% csrf_token %}
+                <div class="heading">
+                    SignUp
+                </div>
+                <div class="line"></div>
+                <div class="field">
+                    <b>Username</b>
+                    <input type="text" required class="inp" placeholder="Enter your Username" name="fnm">
+                </div>
+                <div class="field">
+                    <b>Email</b>
+                    <input type="email" required class="inp" name="email">
+                </div>
+                <div class="field">
+                    <b>Password</b>
+                    <input type="password" class="inp" name="pwd" required> 
+                </div>
+                <div class="field">
+                    <input type="submit" class="submit-button" value="SignUp">
+                </div>
+            </form>
+            <div class="field">
+                <b>Already have an account?</b>
+                <br>
+                <a href="/login.html"></a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
