@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="signup-login">
+        <div class="todo-box">
+            <div>
+                <h1>Hi, {{user}}</h1>
+            </div>
+            <div class="heading">
+                    Get things done!
+            </div>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" class="inp" name="title" required placeholder="Add Today's Task!">
+                <input type="submit" class="submit-btn" value="Add Task">
+            </form>
+            {% for todo in result %}
+                <div class="todo">
+                    <h5>{{todo.srno}}</h5>
+                    <p>{{todo.title}}</p>
+                    <div>
+                        <a href=""><i class="fas fa-edit"></i></a>
+                        <a href=""><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
