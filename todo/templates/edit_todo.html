@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="signup-login">
+        <div class="todo-box">
+            <div>
+                <h1>Hi, {{user}}</h1>
+            </div>
+            <div class="heading">
+                    Get things done!
+            </div>
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" class="inp" name="title" required placeholder="Add Today's Task!" value={{obj.title}}>
+                <input type="submit" class="submit-btn" value="Edit Task">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -4,6 +4,7 @@ from todo import models
 from todo.models import TODO
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method=='POST':
@@ -39,7 +40,7 @@ def login_view(request):
             return redirect('/signup')
     return render(request, "login.html")
 
-
+@login_required(login_url='/login')
 def todo(request):
     if request.method=="POST":
         title=request.POST.get('title')
@@ -53,6 +54,28 @@ def todo(request):
     return render(request, "todo.html", {'result':result})
 
 
+@login_required(login_url='/login')
+def edit_todo(request, srno):
+    if request.method=="POST":
+        title=request.POST.get('title')
+        print(title)
+        obj=models.TODO.objects.get(srno=srno)
+        obj.title=title
+        obj.save()
+        result=models.TODO.objects.filter(user=request.user).order_by('date')
+        return redirect('/todo', {'result':result})
+        
+    obj=models.TODO.objects.get(srno=srno)
+    return render(request, "edit_todo.html", {'obj': obj})
 
-def edit_todo():
-    
+@login_required(login_url='/login')
+def delete_todo(request, srno):
+    obj=models.TODO.objects.get(srno=srno)
+    obj.delete()
+    return redirect('/todo')
+
+
+
+def signout(request):
+    logout(request)
+    return redirect('/login')

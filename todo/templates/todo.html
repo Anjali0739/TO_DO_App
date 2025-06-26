@@ -12,7 +12,8 @@
             <div class="heading">
                     Get things done!
             </div>
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <a name="signout" href="{% url 'signout' %}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            
             <form method="post">
                 {% csrf_token %}
                 <input type="text" class="inp" name="title" required placeholder="Add Today's Task!">
@@ -23,8 +24,8 @@
                     <h5>{{todo.srno}}</h5>
                     <p>{{todo.title}}</p>
                     <div>
-                        <a href=""><i class="fas fa-edit"></i></a>
-                        <a href=""><i class="fa-solid fa-trash"></i></a>
+                        <a href="/edit_todo/{{todo.srno}}"><i class="fas fa-edit"></i></a>
+                        <a href="/delete_todo/{{todo.srno}}"><i class="fa-solid fa-trash"></i></a>
                     </div>
                 </div>
             {% endfor %}
